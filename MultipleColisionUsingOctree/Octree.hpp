@@ -139,8 +139,16 @@ public:
     //=============================================================================
     void PartitionSpace();
     
+    //=============================================================================
+    /// @fn add
+    /// @brief adds a single ball in the current node
+    //=============================================================================
     void add(Ball* ball);
     
+    //===================== ========================================================
+    /// @fn remove
+    /// @brief removes a single ball in the current node
+    //=============================================================================
     void remove(Ball* ball, Vec3f pos);
     
     //Destroys the children of this, and moves all balls in its descendants

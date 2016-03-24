@@ -69,7 +69,7 @@ void Octree::MapBallToBoundingBox(Ball *ball, Vec3f pos, bool addBall)
                 }
                 else
                 {
-                //    children[x][y][z]->remove(ball, pos);
+                    children[x][y][z]->remove(ball, pos);
                 }
             }
         }
@@ -131,7 +131,7 @@ void Octree::PartitionSpace()
         }
     }
     
-    //Remove all balls from "balls" and add them to the new children
+    //Remove all balls from "ballsInTree" and add them to the new children
     for(int i = 0; i < ballsInTree.size(); ++i)
     {
         MapBallToBoundingBox(ballsInTree.at(i), ballsInTree.at(i)->pos, true);
@@ -178,11 +178,11 @@ void Octree::remove(Ball* ball, Vec3f pos)
 //to the "balls" set
 void Octree::destroyChildren() {
     //Move all balls in descendants of this to the "balls" set
-    //collectBalls(balls);
+    // TODO collectBalls(balls);
     
-    for(int x = 0; x < 2; x++) {
-        for(int y = 0; y < 2; y++) {
-            for(int z = 0; z < 2; z++) {
+    for(int x = 0; x < 2; ++x) {
+        for(int y = 0; y < 2; ++y) {
+            for(int z = 0; z < 2; ++z) {
                 delete children[x][y][z];
             }
         }
@@ -206,9 +206,8 @@ void Octree::potentialBallBallCollisions(std::vector<BallPair> &collisions) {
         //Add all pairs (ball1, ball2) from balls
         for(int i = 0; i < ballsInTree.size(); ++i)
         {
-           // Ball* ball1 = *it;
             for(int j = 0; j < ballsInTree.size(); ++j) {
-              //  Ball* ball2 = *it2;
+                
                 //This test makes sure that we only add each pair once
                 if (ballsInTree.at(i) < ballsInTree.at(j)) {
                     BallPair bp;
